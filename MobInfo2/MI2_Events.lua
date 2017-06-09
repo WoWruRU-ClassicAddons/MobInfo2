@@ -359,8 +359,8 @@ local function MI2_OnTargetChanged()
 		MI2_DbOptionsFrameOnShow()
 	end
 
-	if MI2_DebugEvents > 0 then if MI2_Target then midebug( "new target: idx=["..(MI2_Target.index or "nil").."], last=["..(MI2_LastTargetIdx or "nil").."]" )
-	else midebug( "new target: idx=[nil], last=["..(MI2_LastTargetIdx or "nil").."]" ) end end
+	if MI2_DebugEvents > 0 then if MI2_Target then midebug( MI_TXT_EVENTS_NEW_TARGET.."x=["..(MI2_Target.index or "nil").."], "..MI_TXT_EVENTS_LAST.."=["..(MI2_LastTargetIdx or "nil").."]" )
+	else midebug( MI_TXT_EVENTS_NEW_TARGET.."x=[nil], "..MI_TXT_EVENTS_LAST.."=["..(MI2_LastTargetIdx or "nil").."]" ) end end
 end  -- MI2_OnTargetChanged()
 
 
@@ -547,7 +547,7 @@ local function MI2_EventSelfBuff()
 
 	-- set global flag that a non Mob loot window is being opened
 	if lootAction and lootType then
-		if MI2_DebugEvents > 0 then midebug("non mob loot event: action="..lootAction..", type="..lootType ) end
+		if MI2_DebugEvents > 0 then midebug(MI_TXT_EVENTS_NON_MOB.."="..lootAction..", "..MI_TXT_EVENTS_TYPE.."="..lootType ) end
 		MI2_IsNonMobLoot = true
 	end
 end -- MI2_EventSelfBuff()
@@ -564,7 +564,7 @@ local function MI2_EventSelfBuff_ZHTW()
 
 	-- set global flag that a non Mob loot window is being opened
 	if lootAction and lootType then
-		if MI2_DebugEvents > 0 then midebug("non mob loot event: action="..lootAction..", type="..lootType ) end
+		if MI2_DebugEvents > 0 then midebug(MI_TXT_EVENTS_NON_MOB.."="..lootAction..", "..MI_TXT_EVENTS_TYPE.."="..lootType ) end
 		MI2_IsNonMobLoot = true
 	end
 end -- MI2_EventSelfBuff()
@@ -579,7 +579,7 @@ end -- MI2_EventSelfBuff()
 local function MI2_EventHostileDeath()
 	local s,e, creatureName = string.find( arg1, MI2_ChatScanStrings[2] )
 	if creatureName then
-		if MI2_DebugEvents > 0 then midebug("no XP kill event: mob="..creatureName ) end
+		if MI2_DebugEvents > 0 then midebug(MI_TXT_EVENTS_NO_XP.."="..creatureName ) end
 		MI2_RecordKill( creatureName )
 	end
 end -- MI2_EventHostileDeath()
@@ -594,7 +594,7 @@ end -- MI2_EventHostileDeath()
 function MI2_EventCreatureDiesXP()
 	local s,e, creature, xp = string.find( arg1, MI2_ChatScanStrings[3] )
 	if creature and xp then
-		if MI2_DebugEvents > 0 then midebug("kill event with XP: mob="..creature..", xp="..xp ) end
+		if MI2_DebugEvents > 0 then midebug(MI_TXT_EVENTS_KILL_XP.."="..creature..", "..MI_TXT_EVENTS_XP.."="..xp ) end
 		MI2_RecordKill( creature, tonumber(xp) )
 	end
 end -- MI2_EventCreatureDiesXP()
@@ -648,7 +648,7 @@ local function MI2_Player_Login()
 	MI2_ScanSpellbook()
 
 	if not (myAddOnsFrame_Register or EarthFeature_AddButton or Khaos) then
-		chattext( "MobInfo-2  v"..miVersionNo.."  Loaded,  ".."enter /mi2 or /mobinfo2 for interface")
+		chattext( MI_TXT_EVENTS_MI_VER..miVersionNo..MI_TXT_EVENTS_MI_LOADED)
 	end
 end -- MI2_Player_Login()
 

@@ -631,13 +631,13 @@ function MI2_PrepareForImport()
 	MI2_ZoneTable_Import = MI2_ZoneTable
 	MobHealthDB_Import = MobHealthDB
 	if mobDbSize > 1 then
-		MI2_Import_Status = (mobDbSize-1).." Mobs"
+		MI2_Import_Status = (mobDbSize-1)..MI_TXT_MOBS
 	end
 	if healthDbSize > 0 then
 		if MI2_Import_Status then
 			MI2_Import_Status = MI2_Import_Status.." & " 
 		end
-		MI2_Import_Status = (MI2_Import_Status or "")..healthDbSize.." HP values"
+		MI2_Import_Status = (MI2_Import_Status or "")..healthDbSize..MI_TXT_HP_VALUES
 	end
 end -- MI2_PrepareForImport()
 	
@@ -1107,7 +1107,7 @@ function MI2_RecordLocationAndType( mobIndex )
 		x = floor( x * 100.0 )
 		y = floor( y * 100.0 )
 		local newLocation = { x1=x, x2=x, y1=y, y2=y, z=MI2_CurZone }
-		midebug( "recording location  ("..x.."/"..y.."), z="..MI2_CurZone, 1 )
+		midebug( MI_TXT_REC_LOC.."  ("..x.."/"..y.."), z="..MI2_CurZone, 1 )
 		MI2_CombineLocations( mobData, newLocation, true )
 		MI2_StoreLocation( mobIndex, mobData.location )
 	end
@@ -1176,7 +1176,7 @@ function MI2_RecordKill( creatureName, xp )
 			mobData.kills = (mobData.kills or 0) + 1
 			mobData.killed = 1
 		end
-		midebug( "recording kill: mob="..mobIndex..", kills="..mobData.kills..", XP="..(xp or "nil"), 1 )
+		midebug( MI_TXT_REC_KILL_MOB.."="..mobIndex..", "..MI_TXT_REC_KILL_MOB_KILLS.."="..mobData.kills..", "..MI_TXT_REC_KILL_MOB_XP.."="..(xp or "nil"), 1 )
 		MI2_StoreCharData( mobIndex, mobData, MI2_PlayerName )
 	end
 end -- MI2_RecordKill()
@@ -1193,10 +1193,10 @@ function MI2_RecordDamage( mobIndex, damage )
 		if not mobData.minDamage or mobData.minDamage <= 0 then
 			mobData.minDamage, mobData.maxDamage = damage, damage
 		elseif damage < mobData.minDamage then
-			midebug( "recording new MIN dmg "..damage.." for ["..mobIndex.."] (old="..mobData.minDamage..")", 1 )
+			midebug( MI_TXT_REC_NEW_MIN_DMG..damage..MI_TXT_REC_NEW_DMG_FOR.."["..mobIndex.."] ("..MI_TXT_REC_NEW_DMG_OLD.."="..mobData.minDamage..")", 1 )
 			mobData.minDamage = damage
 		elseif damage > mobData.maxDamage then
-			midebug( "recording new MAX dmg "..damage.." for ["..mobIndex.."] (old="..mobData.maxDamage..")", 1 )
+			midebug( MI_TXT_REC_NEW_MAX_DMG..damage..MI_TXT_REC_NEW_DMG_FOR.."["..mobIndex.."] ("..MI_TXT_REC_NEW_DMG_OLD.."="..mobData.maxDamage..")", 1 )
 			mobData.maxDamage = damage
 		end
 	end
@@ -1217,7 +1217,7 @@ function MI2_RecordDps( mobIndex, deltaTime, damage  )
 		if not mobData.dps then mobData.dps = newDps end
 		mobData.dps = floor( ((2.0 * mobData.dps) + newDps) / 3.0 )
 		MI2_StoreCharData( mobIndex, mobData, MI2_PlayerName )
-		midebug( "recording new dps: idx="..mobIndex..", new dps="..mobData.dps, 1 )
+		midebug( MI_TXT_REC_NEW_DPS.."="..mobIndex..", "..MI_TXT_NEW_DPS.."="..mobData.dps, 1 )
 	end
 end -- MI2_RecordDps()
 
@@ -1487,7 +1487,7 @@ local function MI2_RecordLootSlotData( mobIndex, mobData, slotID )
 		mobData.r5 = (mobData.r5 or 0) + 1
 	end
 	
-	midebug( "Loot: slot="..slotID..", name=["..itemName.."], id=["..itemID.."], q=["..(quality).."]", 1 )
+	midebug( MI_TXT_LOOT_SLOT.."="..slotID..", "..MI_TXT_Q_NAME.."=["..itemName.."], "..MI_TXT_Q_ID.."=["..itemID.."], "..MI_TXT_Q_q.."=["..(quality).."]", 1 )
 	return false,false
 end -- MI2_RecordLootSlotData()
 
@@ -1560,7 +1560,7 @@ end -- MI2_GetCorpseId()
 -- a list of corpse IDs is maintained to allow detecting corpse reopening
 -----------------------------------------------------------------------------
 function MI2_StoreCorpseId( corpseId, isNewCorpse )
-	midebug( "storing new corpse ID ["..(corpseId or "nil").."], newIdx="..MI2_NewCorpseIdx..", curIdx="..(MI2_CurrentCorpseIndex or "<nil>"), 1 )
+	midebug( MI_TXT_NEW_CORPSE.." ["..(corpseId or "nil").."], newIdx="..MI2_NewCorpseIdx..", curIdx="..(MI2_CurrentCorpseIndex or "<nil>"), 1 )
 
 	-- store a new corpse ID
 	if isNewCorpse then
@@ -1770,11 +1770,11 @@ local function MI2_AddResistToTooltip( resistData )
 	end
 
 	if resiatances ~= "" then
-		GameTooltip:AddLine( mifontGold.."Resist:"..mifontWhite..resiatances )
+		GameTooltip:AddLine( mifontGold..MI_TXT_RESIST..mifontWhite..resiatances )
 	end
 
 	if immunities ~= "" then
-		GameTooltip:AddLine( mifontGold.."Immun:"..mifontWhite..immunities )
+		GameTooltip:AddLine( mifontGold..MI_TXT_IMMUN..mifontWhite..immunities )
 	end
 end -- MI2_AddResistToTooltip
 
@@ -1908,17 +1908,17 @@ end -- MI2_CreateNormalTooltip()
 -- tooltip
 -----------------------------------------------------------------------------
 local function MI2_CreateDebugTooltip( mobIndex )
-	GameTooltip:AddLine("--------------  D e b u g   I n f o  --------------")
-	GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."mobIndex=",mobIndex)
+	GameTooltip:AddLine(MI_TXT_DEBUG_INFO)
+	GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold.."mobIndex=",mobIndex)
 	if MobInfoDB[mobIndex] then
-		if MobInfoDB[mobIndex].bi then GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."bi(basic info)",mifontWhite..MobInfoDB[mobIndex].bi) end
-		if MobInfoDB[mobIndex].qi then GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."qi(quality info)",mifontWhite..MobInfoDB[mobIndex].qi) end
-		if MobInfoDB[mobIndex].ml then GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."ml(mob location)",mifontWhite..MobInfoDB[mobIndex].ml) end
-		if MobInfoDB[mobIndex].il then GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."il(item list)",mifontWhite..MobInfoDB[mobIndex].il) end
-		if MobInfoDB[mobIndex].re then GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."re(resists)",mifontWhite..MobInfoDB[mobIndex].re) end
-		if MI2_PlayerName and MobInfoDB[mobIndex][MI2_PlayerName] then GameTooltip:AddDoubleLine("[DBG] "..mifontGold..MI2_PlayerName.."(char data)",mifontWhite..MobInfoDB[mobIndex][MI2_PlayerName]) end
+		if MobInfoDB[mobIndex].bi then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI_TXT_DEBUG_BI,mifontWhite..MobInfoDB[mobIndex].bi) end
+		if MobInfoDB[mobIndex].qi then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI_TXT_DEBUG_QI,mifontWhite..MobInfoDB[mobIndex].qi) end
+		if MobInfoDB[mobIndex].ml then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI_TXT_DEBUG_ML,mifontWhite..MobInfoDB[mobIndex].ml) end
+		if MobInfoDB[mobIndex].il then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI_TXT_DEBUG_IL,mifontWhite..MobInfoDB[mobIndex].il) end
+		if MobInfoDB[mobIndex].re then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI_TXT_DEBUG_RE,mifontWhite..MobInfoDB[mobIndex].re) end
+		if MI2_PlayerName and MobInfoDB[mobIndex][MI2_PlayerName] then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI2_PlayerName..MI_TXT_DEBUG_CHAR_DATA,mifontWhite..MobInfoDB[mobIndex][MI2_PlayerName]) end
 	end
-	if MobHealthDB[mobIndex] then GameTooltip:AddDoubleLine("[DBG] "..mifontGold.."hp(health data)=",mifontWhite..MobHealthDB[mobIndex]) end
+	if MobHealthDB[mobIndex] then GameTooltip:AddDoubleLine(MI_TXT_DEBUG_DBG..mifontGold..MI_TXT_DEBUG_HP.."=",mifontWhite..MobHealthDB[mobIndex]) end
 end
 
 
@@ -1941,7 +1941,7 @@ local function MI2_CreateCompactTooltip( mobData, mobIndex, showFullLocation )
 
 	if (mobData.healthCur or mobData.manaMax and mobData.manaMax > 0)  
 			and (MobInfoConfig.ShowHealth == 1 or MobInfoConfig.ShowMana == 1) then
-		GameTooltip:AddDoubleLine( mifontGold.."HP    "..mifontWhite..(mobData.healthCur or 0).." / "..(mobData.healthMax or 0), mifontWhite..(mobData.manaCur or 0).." / "..(mobData.manaMax or 0)..mifontGold.." Mana" )
+		GameTooltip:AddDoubleLine( mifontGold..MI_TXT_HP..mifontWhite..(mobData.healthCur or 0).." / "..(mobData.healthMax or 0), mifontWhite..(mobData.manaCur or 0).." / "..(mobData.manaMax or 0)..mifontGold..MI_TXT_MANA )
 		MI2_HealthLine = GameTooltip:NumLines()
 		if mobData.manaMax and mobData.manaMax > 0 then
 			MI2_ManaLine = MI2_HealthLine
@@ -1950,11 +1950,11 @@ local function MI2_CreateCompactTooltip( mobData, mobIndex, showFullLocation )
 
 	local mobGivesXp = not (mobData.color.r == 0.5  and  mobData.color.g == 0.5  and  mobData.color.b == 0.5)
 	if mobGivesXp and mobData.xp and (MobInfoConfig.ShowXp == 1 or MobInfoConfig.ShowNo2lev == 1) then
-		GameTooltip:AddDoubleLine( mifontGold.."XP    "..mifontWhite..mobData.xp, mifontWhite..mobData.mob2Level..mifontGold.." KtL    " )
+		GameTooltip:AddDoubleLine( mifontGold..MI_TXT_XP..mifontWhite..mobData.xp, mifontWhite..mobData.mob2Level..mifontGold..MI_TXT_KTL )
 	end
 
 	if (mobData.minDamage or mobData.dps) and MobInfoConfig.ShowDamage == 1 then
-		GameTooltip:AddDoubleLine( mifontGold.."Dmg "..mifontWhite..(mobData.minDamage or 0).."-"..(mobData.maxDamage or 0), mifontWhite..(mobData.dps or 0)..mifontGold.." Dps   " )
+		GameTooltip:AddDoubleLine( mifontGold..MI_TXT_DMG..mifontWhite..(mobData.minDamage or 0).."-"..(mobData.maxDamage or 0), mifontWhite..(mobData.dps or 0)..mifontGold..MI_TXT_DPS )
 	end
 
 	if  MobInfoConfig.CombinedMode == 1  and  MobInfoConfig.ShowCombined == 1  then
@@ -1962,7 +1962,7 @@ local function MI2_CreateCompactTooltip( mobData, mobIndex, showFullLocation )
 	end
 
 	if (mobData.kills or mobData.loots) and (MobInfoConfig.ShowKills == 1 or MobInfoConfig.ShowLoots == 1)  then
-		GameTooltip:AddDoubleLine( mifontGold.."Kills  "..mifontWhite..(mobData.kills or 0), mifontWhite..(mobData.loots or 0)..mifontGold.." Loots" )
+		GameTooltip:AddDoubleLine( mifontGold..MI_TXT_KILLS..mifontWhite..(mobData.kills or 0), mifontWhite..(mobData.loots or 0)..mifontGold..MI_TXT_LOOTS )
 	end          
 
 	if  (mobData.emptyLoots or mobData.clothCount) and (MobInfoConfig.ShowCloth == 1 or MobInfoConfig.ShowEmpty == 1)  then
@@ -1974,7 +1974,7 @@ local function MI2_CreateCompactTooltip( mobData, mobIndex, showFullLocation )
 		if mobData.loots then
 			clothStr = clothStr.." ("..ceil(((mobData.clothCount or 0)/mobData.loots)*100).."%) "
 		end
-		GameTooltip:AddDoubleLine( mifontGold.."CL     "..mifontWhite..clothStr, mifontWhite..emptyLootsStr..mifontGold.." EL      " )
+		GameTooltip:AddDoubleLine( mifontGold..MI_TXT_CL..mifontWhite..clothStr, mifontWhite..emptyLootsStr..mifontGold..MI_TXT_EL )
 	end
 
 	if (mobData.copper or mobData.itemValue) and mobData.loots and MobInfoConfig.ShowTotal == 1 then
@@ -1982,12 +1982,12 @@ local function MI2_CreateCompactTooltip( mobData, mobIndex, showFullLocation )
 		local itemValueAvg = ceil( (mobData.itemValue or 0) / mobData.loots )
 		local totalValue = copperAvg + itemValueAvg
 		if totalValue > 0 then
-			GameTooltip:AddDoubleLine( mifontGold.."Val    "..mifontWhite..copper2text(totalValue), mifontWhite..copper2text(copperAvg)..mifontGold.." Coins" )
+			GameTooltip:AddDoubleLine( mifontGold..MI_TXT_VAL..mifontWhite..copper2text(totalValue), mifontWhite..copper2text(copperAvg)..mifontGold..MI_TXT_COINS )
 		end
 	end
 
 	if  mobData.qualityStr ~= ""  and  MobInfoConfig.ShowQuality == 1  then
-		GameTooltip:AddLine( mifontGold.."Q      "..mifontWhite..mobData.qualityStr )
+		GameTooltip:AddLine( mifontGold..MI_TXT_Q..mifontWhite..mobData.qualityStr )
 	end
 
 	if mobData.resists and MobInfoConfig.ShowResists == 1 then
@@ -2059,11 +2059,11 @@ function MI2_BuildMobInfoTooltip( mobName, mobLevel, showFullLocation )
 				if MobInfoDB[mobIndex] then
 					local dataToCombine = MI2_FetchMobData( mobIndex )
 					MI2_AddTwoMobs( combined, dataToCombine )
-					combined.combinedStr = combined.combinedStr.." L"..levelToCombine
+					combined.combinedStr = combined.combinedStr..MI_TXT_LEVEL..levelToCombine
 					combined.color = GetDifficultyColor( levelToCombine )
 				end
 			else
-				combined.combinedStr = combined.combinedStr.." L"..levelToCombine
+				combined.combinedStr = combined.combinedStr..MI_TXT_LEVEL..levelToCombine
 			end
 		end
 		mobData = combined
@@ -2180,7 +2180,7 @@ function MI2_BuildItemDataTooltip( itemName )
 	table.sort( sortList, function(a,b) return (a.rating > b.rating) end  )
 
 	-- add Mobs to tooltip
-	GameTooltip:AddLine( mifontLightBlue..MI_TXT_DROPPED_BY..numMobs.." Mobs:" )
+	GameTooltip:AddLine( mifontLightBlue..MI_TXT_DROPPED_BY..numMobs..MI_TXT_MOBS_1 )
 	if numMobs > 8 then numMobs = 8 end
 	for idx = 1, numMobs do
 		local data = sortList[idx]
@@ -2316,7 +2316,7 @@ function MI2_UpdateTooltipHealthMana( healthCur, healthMax )
 		local healthText = healthCur.." / "..healthMax
 		if MobInfoConfig.CompactMode == 1 then
 			local healthLine = getglobal(tooltip.."TextLeft"..MI2_HealthLine)
-			healthLine:SetText( mifontGold.."HP    "..mifontWhite..healthText )
+			healthLine:SetText( mifontGold..MI_TXT_HP..mifontWhite..healthText )
 		else
 			local healthLine = getglobal(tooltip.."TextRight"..MI2_HealthLine)
 			healthLine:SetText( mifontWhite..healthText )
@@ -2327,7 +2327,7 @@ function MI2_UpdateTooltipHealthMana( healthCur, healthMax )
 		local manaText = mifontWhite..UnitMana("mouseover").." / "..UnitManaMax("mouseover")
 		local manaLine = getglobal(tooltip.."TextRight"..MI2_ManaLine)
 		if MobInfoConfig.CompactMode == 1 then
-			manaLine:SetText( manaText..mifontGold.." Mana" )
+			manaLine:SetText( manaText..mifontGold..MI_TXT_MANA )
 		else
 			manaLine:SetText( manaText )
 		end

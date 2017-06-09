@@ -395,7 +395,7 @@ function MI2_ShowSearchResultTooltip()
 		if MI2_SearchOptions.ListMode == "Mobs" then
 			local index = MI2_SearchResultList[selection].idx
 			local mobName, mobLevel = MI2_GetIndexComponents( index )
-			local mobCaption = mobName.."  L"..mobLevel
+			local mobCaption = mobName..MI_TXT_SEARCH_LVL..mobLevel
 			if MI2_SearchResultList[selection].type then
 				mobCaption = mobCaption.."+"
 			end
@@ -453,7 +453,7 @@ function MI2_DeleteSearchResultMobs()
 		local mobIndex = val.idx
 		MI2_DeleteMobData( mobIndex, true )
 	end
-	chattext( "search result deleted : "..MI2_NumMobsFound.." Mobs" )
+	chattext( MI_TXT_SEARCH_DEL..MI2_NumMobsFound..MI_TXT_SEARCH_MOBS )
 	MI2_UpdateSearchResultList()
 end -- MI2_DeleteSearchResultMobs()
 

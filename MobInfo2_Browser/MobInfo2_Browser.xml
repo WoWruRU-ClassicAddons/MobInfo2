@@ -1143,7 +1143,7 @@
 							</OnClick>
 						</Scripts>
 					</Button>
-					<Button name="MI2B_BrowseMaxHealthSort" inherits="MI2B_SortButtonTemplate" text="HP">
+					<Button name="MI2B_BrowseMaxHealthSort" inherits="MI2B_SortButtonTemplate" text="MI2B_HP">
 						<Size>
 							<AbsDimension x="64" y="14"/>
 						</Size>
@@ -1199,7 +1199,7 @@
 							</OnClick>
 						</Scripts>
 					</Button>
-					<Button name="MI2B_BrowseDPSSort" inherits="MI2B_SortButtonTemplate" text="DPS">
+					<Button name="MI2B_BrowseDPSSort" inherits="MI2B_SortButtonTemplate" text="MI2B_DPS">
 						<Size>
 							<AbsDimension x="38" y="14"/>
 						</Size>
@@ -1570,7 +1570,7 @@
 								</FontString>
 							</Layer>
 							<Layer level="ARTWORK">
-								<FontString name="$parentold" inherits="GameFontHighlightSmall" text="G">
+								<FontString name="$parentold" inherits="GameFontHighlightSmall" text="MI2B_G">
 									<Anchors>
 										<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 											<Offset>
@@ -1584,7 +1584,7 @@
 						<Scripts>
 							<OnLoad>
 								--return mifontWhite..g..mifontYellow..'g '..mifontWhite..s ..mifontSubWhite..'s '..mifontWhite..c..mifontGold..'c'
-								MI2B_BrowseMobValueGold:SetText(mifontYellow.."G ");
+								MI2B_BrowseMobValueGold:SetText(mifontYellow..MI2B_G);
 							</OnLoad>
 							<OnTabPressed>
 								if ( IsShiftKeyDown() ) then
@@ -1611,7 +1611,7 @@
 						</Anchors>
 						<Layers>
 							<Layer level="ARTWORK">
-								<FontString name="$parentilver" inherits="GameFontHighlightSmall" text="S">
+								<FontString name="$parentilver" inherits="GameFontHighlightSmall" text="MI2B_S">
 									<Anchors>
 										<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 											<Offset>
@@ -1625,7 +1625,7 @@
 						<Scripts>
 							<OnLoad>
 								--return mifontWhite..g..mifontYellow..'g '..mifontWhite..s ..mifontSubWhite..'s '..mifontWhite..c..mifontGold..'c'
-								MI2B_BrowseMobValueSilver:SetText(mifontSubWhite.."S ");
+								MI2B_BrowseMobValueSilver:SetText(mifontSubWhite..MI2B_S);
 							</OnLoad>
 							<OnTabPressed>
 								if ( IsShiftKeyDown() ) then
@@ -1652,7 +1652,7 @@
 						</Anchors>
 						<Layers>
 							<Layer level="ARTWORK">
-								<FontString name="$parentopper" inherits="GameFontHighlightSmall" text="C">
+								<FontString name="$parentopper" inherits="GameFontHighlightSmall" text="MI2B_C">
 									<Anchors>
 										<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 											<Offset>
@@ -1666,7 +1666,7 @@
 						<Scripts>
 							<OnLoad>
 								--return mifontWhite..g..mifontYellow..'g '..mifontWhite..s ..mifontSubWhite..'s '..mifontWhite..c..mifontGold..'c'
-								MI2B_BrowseMobValueCopper:SetText(mifontGold.."C ");
+								MI2B_BrowseMobValueCopper:SetText(mifontGold..MI2B_C);
 							</OnLoad>
 							<OnTabPressed>
 								if ( IsShiftKeyDown() ) then

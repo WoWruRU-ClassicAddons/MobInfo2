@@ -24,13 +24,13 @@
 --
 
 
-local MI_CONVERTER = "DR Converter: "
-local MI_MOBSFOUND = " Mobs found in DropRate data,"
-local MI_NEWMOBSFOUND = " new Mobs added to database,"
-local MI_EXISTINGMOBS = " existing Mobs expanded,"
-local MI_PARTIALMOBS = " Mobs partially converted,"
-local MI_SKIPPEDITEMS = " unknown items skipped,"
-local MI_ADDEDITEMS = " items added to database,"
+local MI_CONVERTER = MI_TXT_CONVERTER
+local MI_MOBSFOUND = MI_TXT_MOBSFOUND
+local MI_NEWMOBSFOUND = MI_TXT_CONVDROPRATE_NEWMOBSFOUND
+local MI_EXISTINGMOBS = MI_TXT_CONVDROPRATE_EXISTINGMOBS
+local MI_PARTIALMOBS = MI_TXT_CONVDROPRATE_PARTIALMOBS
+local MI_SKIPPEDITEMS = MI_TXT_CONVDROPRATE_SKIPPEDITEMS
+local MI_ADDEDITEMS = MI_TXT_CONVDROPRATE_ADDEDITEMS
 
 
 -----------------------------------------------------------------------------
@@ -46,10 +46,10 @@ function MI2_StartDropRateConversion()
 	local itemsSkipped = 0
 	local itemsFound = 0
 
-	chattext( MI_CONVERTER.."DropRate conversion started ..." )
+	chattext( MI_CONVERTER..MI_TXT_CONVDROPRATE_CONVERSTART )
 	
 	if not drdb then
-		chattext( "DropRate database not found" )
+		chattext( MI_TXT_CONVDROPRATE_NOTFOUND )
 		return
 	end
 	

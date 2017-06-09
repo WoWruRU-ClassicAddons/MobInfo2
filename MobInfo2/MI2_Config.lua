@@ -271,20 +271,20 @@ function MI2_DbOptionsFrameOnShow()
 	if MI2_Import_Status then
 		if MobInfoConfig.ImportSignature == MI2_Import_Signature then
 			MI2_OptImportMobData:Disable()
-			MI2_TxtImportStatus:SetText( "Status: <data already imported ("..MI2_Import_Status..")>" )
+			MI2_TxtImportStatus:SetText( MI_TXT_STATUS_ALREADY.."("..MI2_Import_Status..")>" )
 		elseif MI2_Import_Status == "BADVER" then
 			MI2_OptImportMobData:Disable()
-			MI2_TxtImportStatus:SetText( "Status: <import database too old for import>" )
+			MI2_TxtImportStatus:SetText( MI_TXT_STATUS_OLD )
 		elseif MI2_Import_Status == "BADLOC" then
 			MI2_OptImportMobData:Disable()
-			MI2_TxtImportStatus:SetText( "Status: <import database has wrong language (locale)>" )
+			MI2_TxtImportStatus:SetText( MI_TXT_STATUS_WRONG )
 		else
 			MI2_OptImportMobData:Enable()
-			MI2_TxtImportStatus:SetText( "Status: "..MI2_Import_Status.." available for import" )
+			MI2_TxtImportStatus:SetText( MI_TXT_STATUS..MI2_Import_Status..MI_TXT_STATUS_AVAILABLE )
 		end
 	else
 		MI2_OptImportMobData:Disable()
-		MI2_TxtImportStatus:SetText( "Status: <no import data>" )
+		MI2_TxtImportStatus:SetText( MI_TXT_STATUS_NOIMPORT )
 	end
 end  -- MI2_DbOptionsFrameOnShow()
 

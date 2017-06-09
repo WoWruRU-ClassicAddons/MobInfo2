@@ -135,7 +135,7 @@ function MI2_RegisterWithAddonManagers()
 			{
 				id = "MobInfo2",
 				name = "MobInfo2",
-				subtext = "v"..miVersionNo,
+				subtext = MI_TXT_SLASH_VER..miVersionNo,
 				tooltip = MI_DESCRIPTION,
 				icon = "Interface\\AddOns\\MobInfo2\\MobInfoIcon",
 				callback = function(state) MI2_SlashParse( "", false ) end,
@@ -191,7 +191,7 @@ function MI2_SlashAction_ClearTarget()
 		MI2_DeleteMobData( index )
 		MI2_DbOptionsFrameOnShow()
 		ClearTarget()
-		chattext( "data for target "..mifontGreen..index..mifontWhite.." has been deleted" )
+		chattext( MI_TXT_SLASH_DAT_TARGET..mifontGreen..index..mifontWhite..MI_TXT_SLASH_DAT_DEL )
 	end
 end  -- MI2_SlashAction_ClearTarget()
 
@@ -214,7 +214,7 @@ function MI2_Slash_ClearAllConfirmed()
 	elseif MI2_DeleteMode == "PlayerDb" then
 		MobHealthPlayerDB = {}
 	end
-	chattext( "database deleted: "..MI2_DeleteMode )
+	chattext( MI_TXT_SLASH_DAT_DB_DEL..MI2_DeleteMode )
 	MI2_DbOptionsFrameOnShow()
 	ClearTarget()
 end  -- MI2_Slash_ClearAllConfirmed()
@@ -383,7 +383,7 @@ function MI2_SlashAction_ImportMobData()
 	local mobIndex, mobInfo, healthInfo
 	local oldCurZone = MI2_CurZone
 
-	chattext( " starting external database import ...." )
+	chattext( MI_TXT_SLASH_DB_IMPORT )
 
 	-- import loot items into main loot item database
 	for itemId, itemInfo in MI2_ItemNameTable_Import do
@@ -437,13 +437,13 @@ function MI2_SlashAction_ImportMobData()
 	-- restore current zone ID after import
 	MI2_CurZone = oldCurZone
 
-	chattext( " imported "..newMobs.." new Mobs" )
-	chattext( " imported "..newHealth.." new health values" )
-	chattext( " imported "..newItems.." new loot items" )
+	chattext( MI_TXT_SLASH_IMPORTED..newMobs..MI_TXT_SLASH_NEW_MOBS )
+	chattext( MI_TXT_SLASH_IMPORTED..newHealth..MI_TXT_SLASH_NEW_HP_VAL )
+	chattext( MI_TXT_SLASH_IMPORTED..newItems..MI_TXT_SLASH_NEW_ITEMS )
 	if MobInfoConfig.ImportOnlyNew == 0 then
-		chattext( " updated data for "..updatedMobs.." existing Mobs" )
+		chattext( MI_TXT_SLASH_UPD_DATA..updatedMobs..MI_TXT_SLASH_EXS_MOBS )
 	else
-		chattext( " did NOT update data for "..updatedMobs.." existing Mobs" )
+		chattext( MI_TXT_SLASH_NOT_UPD..updatedMobs..MI_TXT_SLASH_EXS_MOBS )
 	end
 
 	-- update database options frame
@@ -500,14 +500,14 @@ function MI2_SlashParse( msg, updateOptions )
 		end
 		return
 	elseif  cmd == 'version'  then
-		chattext( ' MobInfo-2 Version '..miVersionNo )
+		chattext( MI_TXT_SLASH_VERSION..miVersionNo )
 		return
 	elseif  cmd == 'convertdroprate'  then
 		MI2_StartDropRateConversion()
 		return
 	elseif  cmd == 'help'  then
-		chattext( ' Usage: enter /mobinfo2 or /mi2 to open interface' )
-		chattext( ' for AddOn help go to '..mifontLightGreen..'http://www.dizzarian.com/forums/viewforum.php?f=16' )
+		chattext( MI_TXT_SLASH_USAGE )
+		chattext( MI_TXT_SLASH_HELP..mifontLightGreen..'http://www.dizzarian.com/forums/viewforum.php?f=16' )
 		return
 	end
 
@@ -563,7 +563,7 @@ function MI2_OptionParse( optionName, optionData, param, updateOptions )
 	elseif  MobInfoConfig[optionName]  then
 		-- it is a switch toggle option:
 		-- get current option value and toggle it to the opposite state (On<->Off)
-		local valTxt = { val0 = "-OFF-",  val1 = "-ON-" }
+		local valTxt = { val0 = MI_TXT_SLASH_OFF,  val1 = MI_TXT_SLASH_ON }
 		local optValue = MobInfoConfig[ optionName ]
 		optValue = 1 - optValue  -- toggle option
 		MobInfoConfig[optionName] = optValue

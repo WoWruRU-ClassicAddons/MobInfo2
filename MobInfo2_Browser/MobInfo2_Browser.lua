@@ -54,7 +54,7 @@ function MobInfo2_Browser_OnEvent()
 			MI2B_BrowseFrame.Hide = MobInfo2_Browser_Hide;
 		end
 		if( DEFAULT_CHAT_FRAME ) then
-			DEFAULT_CHAT_FRAME:AddMessage("|cffffd200"..MI2B_TITLE.." |cffffff00v"..MI2B_VERSION.." loaded. |cff20ff20(/mi2b to show browser)");
+			DEFAULT_CHAT_FRAME:AddMessage("|cffffd200"..MI2B_TITLE.." |cffffff00v"..MI2B_VERSION..MI2B_LOADED);
 		end
 		if (not MI2BSave) then
 			MI2BSave = {};	
@@ -147,7 +147,7 @@ end
 --/script MI2B_RefreshBrowseList();
 function MI2B_RefreshBrowseList()
 	if (not MI2_DB_VERSION or not MobInfoDB) then
-		DEFAULT_CHAT_FRAME:AddMessage(RED_FONT_COLOR_CODE..MI2B_TITLE.." needs MobInfo2 data to run.");
+		DEFAULT_CHAT_FRAME:AddMessage(RED_FONT_COLOR_CODE..MI2B_TITLE..MI2B_NEEDS_DATA);
 		UIErrorsFrame:AddMessage(MI2B_LOADERROR, 1.0, 0.1, 0.1, 1.0, UIERRORS_HOLD_TIME);
 		PlaySound("igQuestCancel");	
 	end
@@ -310,7 +310,7 @@ function MI2B_ScrollBar_Update()
 			getglobal("MI2B_List"..line.."TextHP"):SetText(healthMax);
 			--getglobal("MI2B_List"..line.."TextMinD"):SetText(minDamage);
 			getglobal("MI2B_List"..line.."TextMaxD"):SetText(maxDamage);
-			getglobal("MI2B_List"..line.."TextDPS"):SetText(dps);
+			getglobal("MI2B_List"..line.."TextDPSS"):SetText(dps);
 
 			getglobal("MI2B_List"..line.."TextLT"):SetText(loots);
 			--getglobal("MI2B_List"..line.."TextELT"):SetText(emptyLoots);
@@ -332,7 +332,7 @@ function MI2B_ScrollBar_Update()
 	if (found == 1) then
 		s = "";	
 	end
-	MI2B_TotalPlayersText:SetText(table.getn(MI2BrowseTable).."  Mob"..s.." "..MI2B_FOUND);
+	MI2B_TotalPlayersText:SetText(table.getn(MI2BrowseTable)..MI2B_MOB..s.." "..MI2B_FOUND);
 end
 
 

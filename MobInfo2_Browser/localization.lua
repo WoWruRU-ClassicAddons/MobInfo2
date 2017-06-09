@@ -6,6 +6,13 @@
 --English--------------------------------------------------
 -----------------------------------------------------------
 if (GetLocale() == "enUS") then
+	BINDING_HEADER_MI2BROWSER = "MobInfo 2 Browser";
+	BINDING_NAME_MI2BROWSER = "Open MobInfo 2 Browser";
+	MI2B_VERSION = " 1.21";
+	MI2B_TITLE = "MobInfo 2 Browser";
+	MI2B_LOADED = " loaded. |cff20ff20(/mi2b to show browser)";
+	MI2B_NEEDS_DATA = " needs MobInfo2 data to run.";
+	MI2B_MOB = "  Mob";
 	MI2B_LOADERROR = "MobInfo2 Browser needs MobInfo2 data to display.  Go kill something!";
 	MI2B_EXPERIENCE = "Experience";
 	MI2B_LEVEL = "Level"
@@ -18,13 +25,56 @@ if (GetLocale() == "enUS") then
 	MI2B_TOTALITEMS = "Total Items: ";
 	MI2B_PERCHAR = "This Character Only";
 	MI2B_PERCHAR_TOOLTIP = "Only show mobs gathered by your currently played character.";
+	MI2B_DPS = "DPS";
+	MI2B_HP = "HP";
+	MI2B_G = "G";
+	MI2B_S = "S";
+	MI2B_C = "C";
 end
 
 
 
+
+--Russian--------------------------------------------------
+--by Maus--------------------------------------------------
+-----------------------------------------------------------
+if (GetLocale() == "ruRU") then
+	BINDING_HEADER_MI2BROWSER = "MobInfo 2 Browser";
+	BINDING_NAME_MI2BROWSER = "Открыть MobInfo 2 Browser";
+	MI2B_VERSION = " 1.21";
+	MI2B_TITLE = "MobInfo 2 Browser";
+	MI2B_LOADED = " загружен. |cff20ff20(Введите /mi2b чтобы открыть браузер)";
+	MI2B_NEEDS_DATA = " для запуска необходимы данные MobInfo2.";
+	MI2B_MOB = "  Существо";
+	MI2B_LOADERROR = "MobInfo2 Browser необходимы данные MobInfo2. Идите и убейте уже кого-нибудь!";
+	MI2B_EXPERIENCE = "Опыт";
+	MI2B_LEVEL = "Уровень"
+	MI2B_DAMAGE_PER_SECOND = "Урон в сек.";
+	MI2B_MAXDAMAGE = "Макс. урон";
+	MI2B_LOCATION = "Местность";
+	MI2B_ITEMNAME = "Название предмета";
+	MI2B_FOUND = "найдено";
+	MI2B_TOTALMOBS = "Всего существ: ";
+	MI2B_TOTALITEMS = "Всего предметов: ";
+	MI2B_PERCHAR = "Только этот персонаж";
+	MI2B_PERCHAR_TOOLTIP = "Отображать данные существ собранных только этим персонажем.";
+	MI2B_DPS = "УВС";
+	MI2B_HP = "Здоровье";
+	MI2B_G = "З";
+	MI2B_S = "С";
+	MI2B_C = "М";
+end
+
 --German---------------------------------------------------
 -----------------------------------------------------------
 if (GetLocale() == "deDE") then
+	BINDING_HEADER_MI2BROWSER = "MobInfo 2 Browser";
+	BINDING_NAME_MI2BROWSER = "Open MobInfo 2 Browser";
+	MI2B_VERSION = " 1.21";
+	MI2B_TITLE = "MobInfo 2 Browser";
+	MI2B_LOADED = " loaded. |cff20ff20(/mi2b to show browser)";
+	MI2B_NEEDS_DATA = " needs MobInfo2 data to run.";
+	MI2B_MOB = "  Mob";
 	MI2B_LOADERROR = "MobInfo2 Browser needs MobInfo2 data to display.  Go kill something!";
 	MI2B_EXPERIENCE = "Erfahrung";
 	MI2B_LEVEL = "Stufe"
@@ -37,21 +87,38 @@ if (GetLocale() == "deDE") then
 	MI2B_TOTALITEMS = "Total Items: ";
 	MI2B_PERCHAR = "This Character Only";
 	MI2B_PERCHAR_TOOLTIP = "Zeige nur Mobs mit Daten zum aktuell gespielten Character.";
+	MI2B_DPS = "DPS";
+	MI2B_HP = "HP";
+	MI2B_G = "G";
+	MI2B_S = "S";
+	MI2B_C = "C";
 end
 
 --French---------------------------------------------------
 -----------------------------------------------------------
 if (GetLocale() == "frFR") then
+	BINDING_HEADER_MI2BROWSER = "MobInfo 2 Browser";
+	BINDING_NAME_MI2BROWSER = "Open MobInfo 2 Browser";
+	MI2B_VERSION = " 1.21";
+	MI2B_TITLE = "MobInfo 2 Browser";
+	MI2B_LOADED = " loaded. |cff20ff20(/mi2b to show browser)";
+	MI2B_NEEDS_DATA = " needs MobInfo2 data to run.";
+	MI2B_MOB = "  Mob";
 	MI2B_LOADERROR = "MobInfo2 Browser needs MobInfo2 data to display.  Go kill something!";
-	MI2B_EXPERIENCE = "Exp�rience";
+	MI2B_EXPERIENCE = "Expйrience";
 	MI2B_LEVEL = "Level"
-	MI2B_DAMAGE_PER_SECOND = "D�g�ts par seconde";
-	MI2B_MAXDAMAGE = "Max D�g�ts";
+	MI2B_DAMAGE_PER_SECOND = "Dйgвts par seconde";
+	MI2B_MAXDAMAGE = "Max Dйgвts";
 	MI2B_LOCATION = "Position";
 	MI2B_ITEMNAME = "Item Name";
-	MI2B_FOUND = "trouv�es";
+	MI2B_FOUND = "trouvйes";
 	MI2B_TOTALMOBS = "Total Mobs: ";
 	MI2B_TOTALITEMS = "Total Items: ";
 	MI2B_PERCHAR = "This Character Only";
 	MI2B_PERCHAR_TOOLTIP = "Only show mobs gathered by your currently played character.";
+	MI2B_DPS = "DPS";
+	MI2B_HP = "HP";
+	MI2B_G = "G";
+	MI2B_S = "S";
+	MI2B_C = "C";
 end	
